@@ -1,0 +1,3 @@
+[submodule "ubuntu_18_04-ros_melodic-gazebo/examples/hector_quadrotor"]
+	path = ubuntu_18_04-ros_melodic-gazebo/examples/hector_quadrotor
+	url = git@gitlab.com:beerlab/robot_programming_course/hector_quadrotor.git

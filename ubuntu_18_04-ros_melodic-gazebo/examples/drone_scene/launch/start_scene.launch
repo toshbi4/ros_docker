@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+      <arg name="world_name" value="$(find drone_scene)/worlds/line.world"/>
+      <arg name="paused" value="false"/>
+      <arg name="use_sim_time" value="true"/>
+      <arg name="gui" value="true"/>
+      <arg name="headless" value="false"/>
+      <arg name="debug" value="false"/>
+    </include>
+
+    <!-- Spawn simulated quadrotor uav -->
+    <include file="$(find hector_quadrotor_gazebo)/launch/spawn_quadrotor.launch" >
+      <arg name="model" value="$(find hector_quadrotor_description)/urdf/quadrotor_with_cam.gazebo.xacro"/>
+      <arg name="x" value="0.19873"/>
+      <arg name="y" value="-0.224115"/>
+      <arg name="z" value="0.35"/>
+      <arg name="yaw" value="0.01"/>
+      <arg name="controllers" value="controller/attitude controller/velocity controller/position"/>
+    </include>
+
+</launch>
