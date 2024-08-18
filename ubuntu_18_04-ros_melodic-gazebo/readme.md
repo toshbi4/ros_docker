@@ -23,3 +23,4 @@ Use `-n` argument with docker scripts for Nvidia graphics
 - Source Ros env variables: `source /catkin_ws/devel/setup.bash`
 - Start the quadcopter scene: `roslaunch drone_scene start_scene.launch`
 - Run script with drone control commands: `rosrun drone_solution line_follower.py`
+
