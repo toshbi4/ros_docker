@@ -77,7 +77,7 @@ RUN pip install keras==2.1.5
 
 # catkin ws
 RUN apt install -y ros-melodic-turtlebot3 ros-melodic-turtlebot3-msgs ros-melodic-turtlebot3-simulations
-RUN mkdir -p ~/catkin_ws/src/ && cd ~/catkin_ws/src/ && git clone https://github.com/ROBOTIS-GIT/turtlebot3_machine_learning.git
+RUN mkdir -p ~/catkin_ws/src/ && cd ~/catkin_ws/src/ && git clone https://github.com/toshbi4/turtlebot3_machine_learning.git
 RUN cd ~/catkin_ws/src/ && git clone -b kinetic-devel https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git
 RUN /bin/bash -c 'source /opt/ros/melodic/setup.bash && cd ~/catkin_ws && catkin_make'
 
