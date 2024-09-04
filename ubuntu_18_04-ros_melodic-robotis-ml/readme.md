@@ -2,19 +2,12 @@
 
 ### Docker manipulation scripts
 - Install docker: `./install_docker.bash`
-- Build docker: `./build_docker.sh`
-- Startup docker: `./run_docker.bash`
-- Connect to started docker: `./exec_docker.sh`
-
----
-**NOTE**
-
-Use `-n` argument with docker scripts for Nvidia graphics
-
----
+- Build docker: `make build` `make build-nvidia`
+- Startup docker: `make run` `make run-nvidia`
+- Connect to started docker: `make connect`
 
 ### Startup examples
 
-- Run docker: `./run_docker.bash`
-- Run all commands from `dqn_start.sh` script
+- Startup docker: `make run-nvidia`
+- Inside docker console: `bash ../dqn_start.sh`
 

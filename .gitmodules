@@ -1,3 +1,10 @@
 [submodule "ubuntu_18_04-ros_melodic-gazebo/examples/hector_quadrotor"]
 	path = ubuntu_18_04-ros_melodic-gazebo/examples/hector_quadrotor
 	url = git@gitlab.com:beerlab/robot_programming_course/hector_quadrotor.git
+[submodule "ubuntu_18_04-ros_melodic-robotis-ml/catkin_ws/src/turtlebot3_machine_learning"]
+	path = ubuntu_18_04-ros_melodic-robotis-ml/catkin_ws/src/turtlebot3_machine_learning
+	url = https://github.com/toshbi4/turtlebot3_machine_learning.git
+[submodule "ubuntu_18_04-ros_melodic-robotis-ml/catkin_ws/src/turtlebot3_simulations"]
+	path = ubuntu_18_04-ros_melodic-robotis-ml/catkin_ws/src/turtlebot3_simulations
+	url = https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git
+	branch = kinetic-devel

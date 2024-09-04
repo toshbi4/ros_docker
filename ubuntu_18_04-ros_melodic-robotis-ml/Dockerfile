@@ -1,6 +1,15 @@
-ARG from
+ARG base_image=ubuntu:18.04
 
-FROM ${from}
+FROM ${base_image}
+
+ARG user_name
+ARG user_id
+ARG group_id
+
+# Set default values for user and group IDs
+ENV user_name=${user_name:-defaultuser}
+ENV user_id=${user_id:-1000}
+ENV group_id=${group_id:-1000}
 
 RUN apt-get update && apt-get install -y apt-utils \
                                          lsb-release \
@@ -17,7 +26,6 @@ RUN apt-get update && apt-get install -y apt-utils \
 
 
 # Timezone Configuration
-
 ENV TZ=Europe/Moscow
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
@@ -75,19 +83,22 @@ RUN pip install msgpack argparse
 RUN pip install -U rosinstall empy defusedxml netifaces
 RUN pip install keras==2.1.5
 
-# catkin ws
-RUN apt install -y ros-melodic-turtlebot3 ros-melodic-turtlebot3-msgs ros-melodic-turtlebot3-simulations
-RUN mkdir -p ~/catkin_ws/src/ && cd ~/catkin_ws/src/ && git clone https://github.com/toshbi4/turtlebot3_machine_learning.git
-RUN cd ~/catkin_ws/src/ && git clone -b kinetic-devel https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git
-RUN /bin/bash -c 'source /opt/ros/melodic/setup.bash && cd ~/catkin_ws && catkin_make'
-
-# RUN pip install tensorflow==1.14
+# Tensorflow
 RUN pip install protobuf==3.6.1
 RUN pip install tensorflow==1.14.0
-# RUN pip install --ignore-installed --upgrade https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-1.8.0-cp27-none-linux_x86_64.whl
 RUN pip install numpy pyqtgraph
 RUN pip install tensorboard
 
+# Turtlebot3
+RUN apt install -y ros-melodic-turtlebot3 ros-melodic-turtlebot3-msgs ros-melodic-turtlebot3-simulations
 # Patch to decrease a sensor scanning density
 RUN sed -i 's/>360</>24</g' /opt/ros/melodic/share/turtlebot3_description/urdf/turtlebot3_waffle.gazebo.xacro
 RUN sed -i 's/>360</>24</g' /opt/ros/melodic/share/turtlebot3_gazebo/models/turtlebot3_waffle/model.sdf
+
+# Create a group and user with the specified IDs
+RUN groupadd -g $group_id mygroup && \
+    useradd -m -u $user_id -g mygroup $user_name
+# Switch to the newly created user
+USER $user_name
+RUN echo "source /opt/ros/melodic/setup.bash"  >> ~/.bashrc
+
